@@ -1,5 +1,9 @@
 # Password Generator Web Application
 
+## Demo
+
+![Testing](testing.gif)
+
 A password generator web application with some customization options to generate different type of passwords using Spring Boot, Hibernate,Maven.
 
 ## What is Random Password Generator
