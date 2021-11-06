@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class PasswordGeneratorService implements IPasswordGeneratorService {
+	@Override
 	public String firstAlgorithm() throws NoSuchAlgorithmException{
 		String[] symbols = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f"};
 		int length = 10;
