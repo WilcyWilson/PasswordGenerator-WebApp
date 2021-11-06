@@ -13,24 +13,37 @@
 <body>
 	<div class="container">
 		<h2>Random Password Generator</h2>
-		<form class="row g-3">
+		<form class="row g-3" method="get" action="" id="frmRoverType">
 			<div class="col-8 col-sm-8 col-md-4 col-lg-2">
 				<label for="inputPassword" class="col-form-label">Your
 					Password:</label>
 			</div>
 			<div class="col-6 col-sm-6 col-md-4 col-lg-6">
-				<input type="text" class="form-control" id="inputPassword" th:value="${password}">
+				<input type="text" class="form-control" id="inputPassword"
+					th:value="${password}">
 			</div>
 			<div class="col-sm-8 col-md-4 col-lg-2">
-				<button type="submit" class="btn btn-primary mb-3">Generate Password</button>
+				<button type="submit" class="btn btn-primary mb-3">Generate
+					Password</button>
+			</div>
+			<div class="row">
+				<div class="col-12 col-md-4">
+					<div class="form-check">
+						<input class="form-check-input" type="checkbox"
+							th:field="${homeEntity.symbols}"> <label
+							class="form-check-label" for="symbols1">Include Symbols (
+							e.g. @#$% )</label>
+					</div>
+				</div>
 			</div>
 		</form>
 		<div class="col-auto">
-				<button onclick="copyText()" class="btn btn-primary mb-3">Copy</button>
+			<button onclick="copyText()" class="btn btn-primary mb-3">Copy</button>
 		</div>
 	</div>
 
 </body>
 <script type="text/javascript" src="/js/index.js">
+	
 </script>
 </html>
