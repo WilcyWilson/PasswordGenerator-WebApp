@@ -2,7 +2,7 @@
 
 ## Demo
 
-![Testing](testing2.gif)
+![Testing](testing3.gif)
 
 A password generator web application with some customization options to generate different type of passwords using Spring Boot, Hibernate,Maven.
 

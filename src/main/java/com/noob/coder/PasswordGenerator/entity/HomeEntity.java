@@ -4,7 +4,8 @@ public class HomeEntity {
 	private long userId;
 	private Boolean symbols;
 	private Boolean uppercase;
-	private int Length;
+	private Boolean ambiguousCharacters;
+	private int length;
 	private Boolean rememberPreferences;
 
 	public long getUserId() {
@@ -31,12 +32,20 @@ public class HomeEntity {
 		this.uppercase = uppercase;
 	}
 
+	public Boolean getAmbiguousCharacters() {
+		return ambiguousCharacters;
+	}
+
+	public void setAmbiguousCharacters(Boolean ambiguousCharacters) {
+		this.ambiguousCharacters = ambiguousCharacters;
+	}
+
 	public int getLength() {
-		return Length;
+		return length;
 	}
 
 	public void setLength(int length) {
-		Length = length;
+		this.length = length;
 	}
 
 	public Boolean getRememberPreferences() {
