@@ -13,7 +13,7 @@ import com.noob.coder.PasswordGenerator.entity.HomeEntity;
 
 @Service
 public class PasswordGeneratorService {
-	public String firstAlgorithm(List<String> symbols, int length) throws NoSuchAlgorithmException {
+	private String firstAlgorithm(List<String> symbols, int length) throws NoSuchAlgorithmException {
 		Random random = SecureRandom.getInstanceStrong();
 		StringBuilder sb = new StringBuilder(length);
 		for (int i = 0; i < length; i++) {
