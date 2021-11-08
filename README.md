@@ -1,4 +1,4 @@
-# Password Generator Web Application
+# Random Password Generator Web Application
 
 ## Demo
 
