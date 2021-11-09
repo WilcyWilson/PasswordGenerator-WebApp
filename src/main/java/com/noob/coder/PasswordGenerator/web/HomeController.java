@@ -8,17 +8,17 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.noob.coder.PasswordGenerator.entity.HomeEntity;
-import com.noob.coder.PasswordGenerator.service.PasswordGeneratorService;
+import com.noob.coder.PasswordGenerator.service.ICheckAlgorithmService;
 
 @Controller
 public class HomeController {
 
 	@Autowired
-	private PasswordGeneratorService passwordService;
+	private ICheckAlgorithmService service;
 
 	@GetMapping("/")
 	public String getHomeView(ModelMap model, HomeEntity homeEntity) throws NoSuchAlgorithmException {
-		String password = passwordService.checkAlgorithm(homeEntity);
+		String password = service.checkAlgorithm(homeEntity);
 		model.put("password", password);
 		model.put("homeEntity", homeEntity);
 		return "index";
