@@ -14,11 +14,11 @@ import com.noob.coder.PasswordGenerator.service.ICheckAlgorithmService;
 public class HomeController {
 
 	@Autowired
-	private ICheckAlgorithmService service;
+	private ICheckAlgorithmService checkAlgorithmService;
 
 	@GetMapping("/")
 	public String getHomeView(ModelMap model, HomeEntity homeEntity) throws NoSuchAlgorithmException {
-		String password = service.checkAlgorithm(homeEntity);
+		String password = checkAlgorithmService.checkAlgorithm(homeEntity);
 		model.put("password", password);
 		model.put("homeEntity", homeEntity);
 		return "index";
