@@ -5,6 +5,7 @@ public class HomeEntity {
 	private Boolean symbols;
 	private Boolean uppercase;
 	private Boolean ambiguousCharacters;
+	private Boolean similarCharacters;
 	private int length;
 	private Boolean rememberPreferences;
 
@@ -38,6 +39,14 @@ public class HomeEntity {
 
 	public void setAmbiguousCharacters(Boolean ambiguousCharacters) {
 		this.ambiguousCharacters = ambiguousCharacters;
+	}
+
+	public Boolean getSimilarCharacters() {
+		return similarCharacters;
+	}
+
+	public void setSimilarCharacters(Boolean similarCharacters) {
+		this.similarCharacters = similarCharacters;
 	}
 
 	public int getLength() {
