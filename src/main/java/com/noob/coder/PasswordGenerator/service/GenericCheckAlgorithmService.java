@@ -40,6 +40,10 @@ public class GenericCheckAlgorithmService implements ICheckAlgorithmService {
 					"\"", "'", "~", ",", ";", ":", ".", "<", ">"));
 			symbols.addAll(newSymbols);
 		}
+		if (Boolean.TRUE.equals(homeEntity.getSimilarCharacters())) {
+			List<String> newSymbols = new ArrayList<String>(Arrays.asList("i", "l", "1", "L", "o", "0", "O"));
+			symbols.removeAll(newSymbols);
+		}
 		return passwordService.algorithm(symbols, length);
 	}
 }
