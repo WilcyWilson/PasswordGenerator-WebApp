@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.noob.coder.PasswordGenerator.entity.HomeEntity;
@@ -13,6 +14,7 @@ import com.noob.coder.PasswordGenerator.entity.HomeEntity;
 @Service
 public class GenericCheckAlgorithmService implements ICheckAlgorithmService {
 	@Autowired
+	@Qualifier("genericPasswordGeneratorService")
 	private IPasswordGeneratorService passwordService;
 
 	@Override
