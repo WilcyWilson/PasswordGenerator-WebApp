@@ -13,9 +13,11 @@ import com.noob.coder.PasswordGenerator.entity.HomeEntity;
 
 @Service
 public class GenericCheckAlgorithmService implements ICheckAlgorithmService {
-	@Autowired
-	@Qualifier("genericPasswordGeneratorService")
-	private IPasswordGeneratorService passwordService;
+	private final IPasswordGeneratorService passwordService;
+
+	public GenericCheckAlgorithmService(@Qualifier("genericPasswordGeneratorService") IPasswordGeneratorService passwordService) {
+		this.passwordService = passwordService;
+	}
 
 	@Override
 	public String checkAlgorithm(HomeEntity homeEntity) throws NoSuchAlgorithmException {
