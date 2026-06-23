@@ -1,9 +1,7 @@
 package com.noob.coder.PasswordGenerator.service;
 
 import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -13,7 +11,20 @@ import com.noob.coder.PasswordGenerator.entity.HomeEntity;
 @Service
 public class GenericCheckAlgorithmService implements ICheckAlgorithmService {
 	private final IPasswordGeneratorService passwordService;
-	private final static int lengthLimit = 32;
+
+	// constants
+	private static final int MAX_PASSWORD_LENGTH = 32;
+	private static final int MIN_PASSWORD_LENGTH = 6;
+
+	// Using String constants is more memory-efficient than List<String> for single characters
+	private static final String DIGITS = "0123456789";
+	private static final String LOWERCASE_LETTERS = "abcdefghijklmnopqrstuvwxyz";
+	private static final String SYMBOLS = "@#$%";
+	private static final String UPPERCASE_LETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	private static final String AMBIGUOUS_CHARACTERS = "{}[]/\\'\"~,;:.<>";
+
+	// Set for O(1) lookup performance during filtering
+	private static final Set<Character> SIMILAR_CHARACTERS = Set.of('i', 'l', '1', 'L', 'o', '0', 'O');
 
 	public GenericCheckAlgorithmService(@Qualifier("genericPasswordGeneratorService") IPasswordGeneratorService passwordService) {
 		this.passwordService = passwordService;
@@ -21,29 +32,48 @@ public class GenericCheckAlgorithmService implements ICheckAlgorithmService {
 
 	@Override
 	public String checkAlgorithm(HomeEntity homeEntity) throws NoSuchAlgorithmException {
-		int length = Math.min(homeEntity.getLength(), lengthLimit);
-		List<String> symbols = new ArrayList<String>(
-				Arrays.asList("0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f", "g", "h",
-						"i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"));
+
+		// Clamp length to a safe range. Minimum length validation should ideally be enforced at the controller/entity layer.
+		int targetLength = Math.max(MIN_PASSWORD_LENGTH, Math.min(homeEntity.getLength(), MAX_PASSWORD_LENGTH));
+
+		int maxCapacity = DIGITS.length() + LOWERCASE_LETTERS.length()
+				+ SYMBOLS.length() + UPPERCASE_LETTERS.length()
+				+ AMBIGUOUS_CHARACTERS.length();
+
+		// Clarified intent: true means similar characters should be EXCLUDED from the pool
+		boolean excludeSimilarChars = Boolean.TRUE.equals(homeEntity.getSimilarCharacters());
+
+		// Use StringBuilder to construct the character pool efficiently
+		StringBuilder characterPool = new StringBuilder(maxCapacity);
+
+		// Always include digits and lowercase
+		appendToPool(characterPool, DIGITS, excludeSimilarChars);
+		appendToPool(characterPool, LOWERCASE_LETTERS, excludeSimilarChars);
 
 		if (Boolean.TRUE.equals(homeEntity.getSymbols())) {
-			List<String> newSymbols = new ArrayList<String>(Arrays.asList("@", "#", "$", "%"));
-			symbols.addAll(newSymbols);
+			appendToPool(characterPool, SYMBOLS, excludeSimilarChars);
 		}
 		if (Boolean.TRUE.equals(homeEntity.getUppercase())) {
-			List<String> newSymbols = new ArrayList<String>(Arrays.asList("A", "B", "C", "D", "E", "F", "G", "H", "I",
-					"J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"));
-			symbols.addAll(newSymbols);
+			appendToPool(characterPool, UPPERCASE_LETTERS, excludeSimilarChars);
 		}
 		if (Boolean.TRUE.equals(homeEntity.getAmbiguousCharacters())) {
-			List<String> newSymbols = new ArrayList<String>(Arrays.asList("{", "}", "[", "]", "(", ")", "/", "\\", "\'",
-					"\"", "'", "~", ",", ";", ":", ".", "<", ">"));
-			symbols.addAll(newSymbols);
+			appendToPool(characterPool, AMBIGUOUS_CHARACTERS, excludeSimilarChars);
 		}
-		if (Boolean.TRUE.equals(homeEntity.getSimilarCharacters())) {
-			List<String> newSymbols = new ArrayList<String>(Arrays.asList("i", "l", "1", "L", "o", "0", "O"));
-			symbols.removeAll(newSymbols);
+
+		return passwordService.algorithm(characterPool.toString(), targetLength);
+	}
+
+	private void appendToPool(StringBuilder pool, String chars, boolean excludeSimilar) {
+		if (!excludeSimilar) {
+			pool.append(chars);
+			return;
 		}
-		return passwordService.algorithm(symbols, length);
+
+		for (int i = 0; i < chars.length(); i++) {
+			char c = chars.charAt(i);
+			if (!SIMILAR_CHARACTERS.contains(c)) {
+				pool.append(c);
+			}
+		}
 	}
 }
