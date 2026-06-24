@@ -2,7 +2,6 @@ package com.noob.coder.PasswordGenerator.service;
 
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
-import java.util.List;
 import java.util.Random;
 
 import org.springframework.stereotype.Service;
