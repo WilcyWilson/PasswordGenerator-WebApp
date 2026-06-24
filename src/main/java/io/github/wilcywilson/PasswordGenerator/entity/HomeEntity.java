@@ -1,4 +1,4 @@
-package com.noob.coder.PasswordGenerator.entity;
+package io.github.wilcywilson.PasswordGenerator.entity;
 
 import lombok.Data;
 

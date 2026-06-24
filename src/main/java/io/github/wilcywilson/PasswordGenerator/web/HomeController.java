@@ -1,4 +1,4 @@
-package com.noob.coder.PasswordGenerator.web;
+package io.github.wilcywilson.PasswordGenerator.web;
 
 import java.security.NoSuchAlgorithmException;
 
@@ -7,8 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import com.noob.coder.PasswordGenerator.entity.HomeEntity;
-import com.noob.coder.PasswordGenerator.service.ICheckAlgorithmService;
+import io.github.wilcywilson.PasswordGenerator.entity.HomeEntity;
+import io.github.wilcywilson.PasswordGenerator.service.ICheckAlgorithmService;
 
 @Controller
 public class HomeController {

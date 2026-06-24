@@ -1,4 +1,4 @@
-package com.noob.coder.PasswordGenerator.service;
+package io.github.wilcywilson.PasswordGenerator.service;
 
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;

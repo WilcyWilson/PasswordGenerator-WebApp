@@ -1,4 +1,4 @@
-package com.noob.coder.PasswordGenerator.service;
+package io.github.wilcywilson.PasswordGenerator.service;
 
 import java.security.NoSuchAlgorithmException;
 import java.util.Set;
@@ -6,7 +6,7 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import com.noob.coder.PasswordGenerator.entity.HomeEntity;
+import io.github.wilcywilson.PasswordGenerator.entity.HomeEntity;
 
 @Service
 public class GenericCheckAlgorithmService implements ICheckAlgorithmService {
