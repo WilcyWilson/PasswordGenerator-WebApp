@@ -13,13 +13,13 @@ public class GenericCheckAlgorithmService implements ICheckAlgorithmService {
 	private final IPasswordGeneratorService passwordService;
 
 	// constants
-	private static final int MAX_PASSWORD_LENGTH = 32;
+	private static final int MAX_PASSWORD_LENGTH = 128;
 	private static final int MIN_PASSWORD_LENGTH = 6;
 
 	// Using String constants is more memory-efficient than List<String> for single characters
 	private static final String DIGITS = "0123456789";
 	private static final String LOWERCASE_LETTERS = "abcdefghijklmnopqrstuvwxyz";
-	private static final String SYMBOLS = "@#$%";
+	private static final String SYMBOLS = "!@#$%^&*-_+=?";
 	private static final String UPPERCASE_LETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 	private static final String AMBIGUOUS_CHARACTERS = "{}[]/\\'\"~,;:.<>";
 
