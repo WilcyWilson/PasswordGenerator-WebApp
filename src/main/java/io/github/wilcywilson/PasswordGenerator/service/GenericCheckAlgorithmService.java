@@ -60,7 +60,7 @@ public class GenericCheckAlgorithmService implements ICheckAlgorithmService {
 			appendToPool(characterPool, AMBIGUOUS_CHARACTERS, excludeSimilarChars);
 		}
 
-		return passwordService.algorithm(characterPool.toString(), targetLength);
+		return passwordService.generatePassword(characterPool.toString(), targetLength);
 	}
 
 	private void appendToPool(StringBuilder pool, String chars, boolean excludeSimilar) {

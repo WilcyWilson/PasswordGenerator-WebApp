@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class GenericPasswordGeneratorService implements IPasswordGeneratorService {
 	@Override
-	public String algorithm(String availableCharacters, int length) throws NoSuchAlgorithmException {
+	public String generatePassword(String availableCharacters, int length) throws NoSuchAlgorithmException {
 		Random random = SecureRandom.getInstanceStrong();
 		StringBuilder sb = new StringBuilder(length);
 		for (int i = 0; i < length; i++) {

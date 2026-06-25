@@ -11,7 +11,7 @@ import io.github.wilcywilson.PasswordGenerator.entity.HomeEntity;
 import io.github.wilcywilson.PasswordGenerator.service.ICheckAlgorithmService;
 
 @Controller
-public class HomeController {
+public class PasswordRequest {
 
 	@Autowired
 	private ICheckAlgorithmService checkAlgorithmService;
